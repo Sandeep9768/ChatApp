@@ -22,6 +22,38 @@ class Helper {
       }
   }
 
+  async insertMessages(data){
+    console.log(data,'params');
+    
+		try {
+			return await this.db.query(
+				"INSERT INTO message (`from_user_id`,`to_user_id`,`message`) values (?,?,?)",
+				[data.fromUserId, data.toUserId, data.message]
+			);
+		} catch (error) {
+			console.warn(error);
+			return null;
+		}		
+	}
+
+  async getMessages(userId, toUserId){
+    console.log(userId,toUserId);
+    
+		try {
+			return await this.db.query(
+				`SELECT id,from_user_id as fromUserId,to_user_id as toUserId,message FROM message WHERE 
+					(from_user_id = ? AND to_user_id = ? )
+					OR
+					(from_user_id = ? AND to_user_id = ? )	ORDER BY id ASC				
+				`,
+				[userId, toUserId, toUserId, userId]
+			);
+		} catch (error) {
+			console.warn(error);
+			return null;
+		}
+	}
+
   
 }
 module.exports = new Helper()

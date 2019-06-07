@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './Pages/home/home.component';
 import{ChatServicesService} from '../chat-services.service';
 import { FormsModule } from '@angular/forms';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    AboutComponent,
    
   ],
   imports: [

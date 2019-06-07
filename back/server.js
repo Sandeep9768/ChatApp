@@ -7,12 +7,17 @@
 const express = require("express");
 var http = require('http')
 const bodyParser = require('body-parser');
-
+var cors = require('cors')
 const routes = require('./api/router/router'); 
 const socket = require('./api/router/socket'); 
 const socketio = require('socket.io');
 
+function getData(){
+
+}
+
 class Server{
+    
 
     constructor(){
         this.port =  process.env.PORT || 3000;
@@ -26,10 +31,11 @@ class Server{
         this.app.use(
             bodyParser.json()
         );
+        this.app.use(cors())
         // new config(this.app);
     }
     includeRoutes(){
-        //  new routes(this.app).routesConfig();
+         new routes(this.app).routesConfig();
          new socket(this.socket).socketEvent();
         console.log('app');
         
